@@ -107,13 +107,11 @@ def questao06(string_list, analyzed_string, threshold):
     for i in range(1, threshold + 1):
         for p in analyzed_string_indexes:
             new_threshold_index = p - i
-            if new_threshold_index < 0:
-                new_threshold_index = 0
-            threshold_indexes.add(new_threshold_index)
+            if new_threshold_index >= 0:
+                threshold_indexes.add(new_threshold_index)
             new_threshold_index = p + i
-            if new_threshold_index > (len(string_list) - 1):
-                new_threshold_index = (len(string_list) - 1)
-            threshold_indexes.add(new_threshold_index)
+            if new_threshold_index <= (len(string_list) - 1):
+                threshold_indexes.add(new_threshold_index)
 
     threshold_indexes = list(threshold_indexes)
     threshold_indexes.sort()
