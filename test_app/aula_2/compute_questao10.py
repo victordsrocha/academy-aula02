@@ -1,4 +1,4 @@
-from src.gen_functions import region_of_interest
+from src.gen_functions import questao10
 import argparse
 import numpy as np
 
@@ -14,21 +14,17 @@ def main():
     ap.add_argument('-ma', '--matrix',
                     default=default_matrix,
                     help='')
-    ap.add_argument('-rc', '--roi_center',
-                    default=(1, 1),
-                    help='')
-    ap.add_argument('-rs', '--roi_shape',
-                    default=(3, 3),
+    ap.add_argument('-th', '--threshold',
+                    default=10,
                     help='')
 
     args = vars(ap.parse_args())
 
     matrix = args['matrix']
-    roi_center = args['roi_center']
-    roi_shape = args['roi_shape']
-    result = region_of_interest(matrix, roi_center, roi_shape)
+    threshold = args['threshold']
+    result = questao10(matrix, threshold)
     print('Original matrix:\n{}'.format(matrix))
-    print('ROI matrix:\n{}'.format(result))
+    print('\nlimiarização com threshold = {}:\n{}'.format(threshold, result))
 
 
 if __name__ == '__main__':

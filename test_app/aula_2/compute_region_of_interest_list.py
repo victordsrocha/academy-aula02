@@ -1,4 +1,4 @@
-from src.gen_functions import region_of_interest
+from src.gen_functions import region_of_interest_list
 import argparse
 import numpy as np
 
@@ -14,21 +14,24 @@ def main():
     ap.add_argument('-ma', '--matrix',
                     default=default_matrix,
                     help='')
-    ap.add_argument('-rc', '--roi_center',
-                    default=(1, 1),
+    ap.add_argument('-rc', '--roi_center_list',
+                    default=[(1, 1), (2, 2), (2, 2), (2, 2), (2, 2)],
                     help='')
-    ap.add_argument('-rs', '--roi_shape',
-                    default=(3, 3),
+    ap.add_argument('-rs', '--roi_shape_list',
+                    default=[(3, 3), (3, 3), (3, 5), (5, 3), (5, 5)],
                     help='')
 
     args = vars(ap.parse_args())
 
     matrix = args['matrix']
-    roi_center = args['roi_center']
-    roi_shape = args['roi_shape']
-    result = region_of_interest(matrix, roi_center, roi_shape)
+    roi_center = args['roi_center_list']
+    roi_shape = args['roi_shape_list']
+    result = region_of_interest_list(matrix, roi_center, roi_shape)
     print('Original matrix:\n{}'.format(matrix))
-    print('ROI matrix:\n{}'.format(result))
+    print('\nROIs:')
+    for i in range(len(result)):
+        print('center = {}, shape = {}'.format(matrix[roi_center[i][0]][roi_center[i][1]], roi_shape[i]))
+        print('\n{}\n'.format(result[i]))
 
 
 if __name__ == '__main__':
